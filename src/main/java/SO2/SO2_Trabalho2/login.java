@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class login {
+public class Login {
     
 
     @Id
@@ -12,7 +12,7 @@ public class login {
     private String password;
     private int id;
 
-    public login(String user, String password, int id){
+    public Login(String user, String password, int id){
         super();
         this.user= user;
         this.password=password;
