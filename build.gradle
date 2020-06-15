@@ -5,7 +5,7 @@ plugins {
 	id 'war'
 }
 
-group = 'so2'
+group = 'SO2'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '14'
 
