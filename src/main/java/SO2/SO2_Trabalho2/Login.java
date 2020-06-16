@@ -7,9 +7,9 @@ import javax.persistence.Id;
 public class Login {
 
     @Id
+    private int id;
     private String user;
     private String password;
-    private int id;
 
     public Login(String user, String password, int id) {
         super();

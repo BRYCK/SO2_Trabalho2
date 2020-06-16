@@ -2,15 +2,19 @@ package SO2.SO2_Trabalho2;
 
 import java.util.Date;
 import javax.persistence.Entity;
-//import javax.persistence.Id;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Registos {
 
-    int id;
-    String loja;
-    int ocupacao;
-    Date data;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String loja;
+    private int ocupacao;
+    private Date data;
 
     public Registos(int id, String loja, int ocupacao, Date data) {
         super();
