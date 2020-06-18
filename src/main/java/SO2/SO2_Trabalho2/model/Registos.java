@@ -21,7 +21,7 @@ public class Registos {
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Login dono;
+    private Login login;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Lojas loja;
@@ -29,9 +29,9 @@ public class Registos {
     protected Registos() {
     }
 
-    public Registos(Login dono, Lojas loja, int ocupacao, Date data) {
+    public Registos(Login login, Lojas loja, int ocupacao, Instant data) {
         super();
-        this.dono = dono;
+        this.login = login;
         this.loja = loja;
         this.ocupacao = ocupacao;
         this.data = data;
@@ -39,7 +39,7 @@ public class Registos {
 
     @Override
     public String toString() {
-        return String.format("Loja[id=%d, dono='%d', loja='%s', data='%s', ocupacap='%d']", id, dono, loja,
+        return String.format("Loja[id=%d, dono='%d', loja='%s', data='%s', ocupacap='%d']", id, login, loja,
                 data.toString(), ocupacao);
     }
 
@@ -48,7 +48,7 @@ public class Registos {
     }
 
     public Login getDono() {
-        return this.dono;
+        return this.login;
     }
 
     public Lojas getLoja() {
@@ -68,7 +68,7 @@ public class Registos {
     }
 
     public void setDono(Login set) {
-        this.dono = set;
+        this.login = set;
     }
 
     public void setLoja(Lojas set) {
