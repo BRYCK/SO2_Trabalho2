@@ -35,6 +35,16 @@ public class WebController {
 
         return result;
     }
+
+    @RequestMapping("/findu")
+    public String findu(@RequestParam("utilizador") String utilizador, @RequestParam("password") String password) {
+        String result = "";
+
+        result = repository.findByUtilizadorAndPassword(utilizador, password).toString();
+
+        return result;
+    }
+
     /*
      * @RequestMapping("/findbyid") public String findById(@RequestParam("id") int
      * id) { String result = ""; result = repository.findOne(id).toString(); return

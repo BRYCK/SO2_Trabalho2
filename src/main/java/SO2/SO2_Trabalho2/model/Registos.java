@@ -12,6 +12,7 @@ public class Registos {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private int dono;
     private String loja;
     private Date data;

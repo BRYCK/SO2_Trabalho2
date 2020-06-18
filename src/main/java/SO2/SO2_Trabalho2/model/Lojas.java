@@ -1,7 +1,11 @@
 package SO2.SO2_Trabalho2.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -14,12 +18,15 @@ public class Lojas {
     private String nome;
     private String local;
     private int tamanho;
-    private int dono;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private Login dono;
 
     protected Lojas() {
     }
 
-    public Lojas(String nome, String local, int tamanho, int dono) {
+    public Lojas(String nome, String local, int tamanho, Login dono) {
         super();
         this.nome = nome;
         this.local = local;
@@ -49,7 +56,7 @@ public class Lojas {
         return this.local;
     }
 
-    public int getDono() {
+    public Login getDono() {
         return this.dono;
     }
 
@@ -69,7 +76,7 @@ public class Lojas {
         this.local = set;
     }
 
-    public void setDono(int dono) {
+    public void setDono(Login dono) {
         this.dono = dono;
     }
 
