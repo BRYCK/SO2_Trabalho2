@@ -29,7 +29,7 @@ public class Registos {
     protected Registos() {
     }
 
-    public Registos(Login dono, Lojas loja, int ocupacao, Date data) {
+    public Registos(Login dono, Lojas loja, int ocupacao, Instant data) {
         super();
         this.dono = dono;
         this.loja = loja;
