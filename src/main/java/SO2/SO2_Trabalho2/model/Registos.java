@@ -1,6 +1,6 @@
 package SO2.SO2_Trabalho2.model;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public class Registos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private Date data;
+    private Instant data;
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -59,7 +59,7 @@ public class Registos {
         return this.ocupacao;
     }
 
-    public Date getData() {
+    public Instant getData() {
         return this.data;
     }
 
@@ -79,7 +79,7 @@ public class Registos {
         this.ocupacao = set;
     }
 
-    public void setData(Date set) {
+    public void setData(Instant set) {
         this.data = set;
     }
 
