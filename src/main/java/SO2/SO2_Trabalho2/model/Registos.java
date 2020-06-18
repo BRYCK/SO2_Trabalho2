@@ -1,8 +1,12 @@
 package SO2.SO2_Trabalho2.model;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -13,10 +17,15 @@ public class Registos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private int dono;
-    private String loja;
     private Date data;
     private int ocupacao;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Login dono;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Lojas loja;
+    
 
     protected Registos() {
     }
