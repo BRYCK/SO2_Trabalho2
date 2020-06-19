@@ -9,21 +9,21 @@ import SO2.SO2_Trabalho2.repository.LojasRepository;
 import java.util.ArrayList;
 import SO2.SO2_Trabalho2.model.Lojas;
 
-@RestController
+//@RestController
 public class LojasService {
 
     @Autowired
     LojasRepository lojaRepo;
 
-    @GetMapping("/lojas")
+    // @GetMapping("/lojas")
     public ArrayList<Lojas> getAllLojas() {
         ArrayList<Lojas> lojas = new ArrayList<>();
         lojaRepo.findAll().forEach(lojas::add);
         return lojas;
     }
 
-    @GetMapping("/lojas/{id}")
-    public Lojas getLojas(@PathVariable long id) {
+    // @GetMapping("/lojas/{id}")
+    public Lojas getLojas(long id) {
         return lojaRepo.findById(id).orElse(null);
     }
 
