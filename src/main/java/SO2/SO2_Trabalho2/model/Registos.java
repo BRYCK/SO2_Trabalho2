@@ -1,8 +1,7 @@
 package SO2.SO2_Trabalho2.model;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ public class Registos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private LocalDateTime data;
+    private long data;
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -36,15 +35,16 @@ public class Registos {
         this.login = login;
         this.loja = loja;
         this.ocupacao = ocupacao;
-        Instant thisdata= Instant.now();
-        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
-        this.data = ldt;
+        Date date= new Date();
+        long time = date.getTime();
+        this.data = time;
     }
 
     @Override
     public String toString() {
+        Timestamp time= new Timestamp(this.data);
         return String.format("Loja[id=%d, dono='%d', loja='%s', data='%s', ocupacap='%d']", id, login, loja,
-                data.toString(), ocupacao);
+                time, ocupacao);
     }
 
     public long getId() {
@@ -63,7 +63,7 @@ public class Registos {
         return this.ocupacao;
     }
 
-    public LocalDateTime getData() {
+    public long getData() {
         return this.data;
     }
 
@@ -84,9 +84,9 @@ public class Registos {
     }
 
     public void setData() {
-        Instant thisdata= Instant.now();
-        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
-        this.data = ldt;
+        Date date= new Date();
+        long time = date.getTime();
+        this.data = time;
     }
 
 }
