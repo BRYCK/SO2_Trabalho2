@@ -16,4 +16,6 @@ public interface LoginRepository extends CrudRepository<Login, Long> {
     // @Query(value = "SELECT * FROM public.login WHERE utilizador = '?1' AND
     // password = '?2'")
     Login findByUtilizadorAndPassword(String utilizador, String password);
+
+    Login findByUtilizador(String utilizador);
 }
