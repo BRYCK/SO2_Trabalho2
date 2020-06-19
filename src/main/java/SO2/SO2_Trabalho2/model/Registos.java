@@ -1,31 +1,52 @@
 package SO2.SO2_Trabalho2.model;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Date;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Registos {
+
+@NamedNativeQueries({
+@NamedNativeQuery(name = "getAllRegistos", query = "SELECT r FROM Registos r JOIN r.login l ON login=id WHERE r.login=:Id", resultClass=Registos.class),
+@NamedNativeQuery(name = "getAllRegistosLastHour", query = "SELECT r FROM Registos r JOIN r.login l ON login=id WHERE r.login=:Id and r.data>=hour",resultClass=Registos.class)
+})
+
+/*@Query("from Registos r join r.login l where l.utilizador=:User")
+public Iterable<Registos> findByUser(String User);
+
+@Query("from Registos r join r.login l where l.utilizador=:User and r.data >= hour")
+public Iterable<Registos> findByTime(long hour); */
+//1 hora em milisegundos 3600000
+
+public class Registos implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
 
-    private LocalDateTime data;
+    @Column(name="data")
+    private long data;
+    @Column(name="ocupacao")
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name="login")
     private Login login;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name="loja")
     private Lojas loja;
 
     protected Registos() {
@@ -36,15 +57,16 @@ public class Registos {
         this.login = login;
         this.loja = loja;
         this.ocupacao = ocupacao;
-        Instant thisdata= Instant.now();
-        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
-        this.data = ldt;
+        Date date= new Date();
+        long time = date.getTime();
+        this.data = time;
     }
 
     @Override
     public String toString() {
+        Timestamp time= new Timestamp(this.data);
         return String.format("Loja[id=%d, dono='%d', loja='%s', data='%s', ocupacap='%d']", id, login, loja,
-                data.toString(), ocupacao);
+                time, ocupacao);
     }
 
     public long getId() {
@@ -63,7 +85,7 @@ public class Registos {
         return this.ocupacao;
     }
 
-    public LocalDateTime getData() {
+    public long getData() {
         return this.data;
     }
 
@@ -84,9 +106,9 @@ public class Registos {
     }
 
     public void setData() {
-        Instant thisdata= Instant.now();
-        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
-        this.data = ldt;
+        Date date= new Date();
+        long time = date.getTime();
+        this.data = time;
     }
 
 }

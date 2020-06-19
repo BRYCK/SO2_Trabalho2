@@ -9,7 +9,7 @@ public interface RegistosRepository extends JpaRepository<Registos, Long> {
     // @Query("from Registos r join r.login l where l.utilizador=:User")
     public Iterable<Registos> findByUser(String User);
 
-    // @Query("from Registos r join r.login l where l.utilizador=:User and
-    // r.data.getHour:=hour")
-    public Iterable<Registos> findByTime(int hour);
+    @Query("from Registos r join r.login l where l.utilizador=:User and r.data >= hour")
+    public Iterable<Registos> findByTime(long hour);
+    // 1 hora em milisegundos 3600000
 }
