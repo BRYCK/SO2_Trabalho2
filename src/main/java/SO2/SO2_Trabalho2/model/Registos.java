@@ -1,6 +1,8 @@
 package SO2.SO2_Trabalho2.model;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ public class Registos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private Instant data;
+    private LocalDateTime data;
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -29,12 +31,14 @@ public class Registos {
     protected Registos() {
     }
 
-    public Registos(Login login, Lojas loja, int ocupacao, Instant data) {
+    public Registos(Login login, Lojas loja, int ocupacao) {
         super();
         this.login = login;
         this.loja = loja;
         this.ocupacao = ocupacao;
-        this.data = data;
+        Instant thisdata= Instant.now();
+        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
+        this.data = ldt;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class Registos {
         return this.ocupacao;
     }
 
-    public Instant getData() {
+    public LocalDateTime getData() {
         return this.data;
     }
 
@@ -79,8 +83,10 @@ public class Registos {
         this.ocupacao = set;
     }
 
-    public void setData(Instant set) {
-        this.data = set;
+    public void setData() {
+        Instant thisdata= Instant.now();
+        LocalDateTime ldt = LocalDateTime.ofInstant(thisdata, ZoneId.systemDefault());
+        this.data = ldt;
     }
 
 }
