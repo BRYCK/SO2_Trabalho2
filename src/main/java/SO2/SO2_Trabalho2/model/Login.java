@@ -1,5 +1,6 @@
 package SO2.SO2_Trabalho2.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,8 +14,11 @@ public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
+    @Column(name="utilizador")
     private String utilizador;
+    @Column(name="password")
     private String password;
 
     protected Login() {

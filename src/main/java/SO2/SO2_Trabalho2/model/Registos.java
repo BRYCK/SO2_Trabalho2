@@ -1,30 +1,52 @@
 package SO2.SO2_Trabalho2.model;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Registos {
+
+@NamedNativeQueries({
+@NamedNativeQuery(name = "getAllRegistos", query = "SELECT r FROM Registos r JOIN r.login l ON login=id WHERE r.login=:Id", resultClass=Registos.class),
+@NamedNativeQuery(name = "getAllRegistosLastHour", query = "SELECT r FROM Registos r JOIN r.login l ON login=id WHERE r.login=:Id and r.data>=hour",resultClass=Registos.class)
+})
+
+/*@Query("from Registos r join r.login l where l.utilizador=:User")
+public Iterable<Registos> findByUser(String User);
+
+@Query("from Registos r join r.login l where l.utilizador=:User and r.data >= hour")
+public Iterable<Registos> findByTime(long hour); */
+//1 hora em milisegundos 3600000
+
+public class Registos implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
 
+    @Column(name="data")
     private long data;
+    @Column(name="ocupacao")
     private int ocupacao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name="login")
     private Login login;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name="loja")
     private Lojas loja;
 
     protected Registos() {

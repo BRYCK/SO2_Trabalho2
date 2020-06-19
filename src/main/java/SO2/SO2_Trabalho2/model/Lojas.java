@@ -1,6 +1,7 @@
 package SO2.SO2_Trabalho2.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,13 +15,18 @@ public class Lojas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
+    @Column(name="nome")
     private String nome;
+    @Column(name="local")
     private String local;
+    @Column(name="tamanho")
     private int tamanho;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
+    @Column(name="dono")
     private Login dono;
 
     protected Lojas() {
