@@ -10,6 +10,6 @@ import SO2.SO2_Trabalho2.model.Registo;
 
 @Repository
 public interface LojaRepository extends JpaRepository<Loja, Long> {
-    @Query("select Registo r from Loja l where r.data>= :currTime IN l.registos")
-    public List<Registo> findRegistoLastHour(long currTime);
+    // @Query("select Registo r from Loja l where r.data>= :currTime IN l.registos")
+    // public List<Registo> findRegistoLastHour(long currTime);
 }

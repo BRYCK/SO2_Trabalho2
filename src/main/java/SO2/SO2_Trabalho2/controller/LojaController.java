@@ -15,8 +15,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
+import SO2.SO2_Trabalho2.model.Loja;
+import SO2.SO2_Trabalho2.model.Registo;
+import SO2.SO2_Trabalho2.repository.LojaRepository;
+
 @RestController
 @RequestMapping("/loja")
 public class LojaController {
+
+    @Autowired
+    private LojaRepository lojaRepository;
+
+    @GetMapping("/getAll")
+    public List<Loja> getAllLojas() {
+        return lojaRepository.findAll();
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Loja> getLojaById(@PathVariable(value = "id") Long lojaId) throws ResourceNotFoundException {
+        Loja loja = lojaRepository.findById(lojaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
+        return ResponseEntity.ok().body(loja);
+    }
+
+    @PutMapping("/create")
+    public Loja createLoja(@RequestBody Loja loja) {
+        return lojaRepository.save(loja);
+    }
+
+    @GetMapping("/registos/{id}")
+    public List<Registo> getLojaRegistos(@PathVariable(value = "id") Long lojaId) throws ResourceNotFoundException {
+        Loja loja = lojaRepository.findById(lojaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
+        return loja.getRegistos();
+    }
 
 }
