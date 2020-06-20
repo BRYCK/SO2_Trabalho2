@@ -39,7 +39,7 @@ public class RegistoController {
         return ResponseEntity.ok().body(registo);
     }
 
-    @PutMapping("/create")
+    @PostMapping("/create")
     public Registo createRegisto(@RequestBody Registo registo) {
         return registoRepository.save(registo);
     }

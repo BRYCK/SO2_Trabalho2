@@ -39,7 +39,7 @@ public class LojaController {
         return ResponseEntity.ok().body(loja);
     }
 
-    @PutMapping("/create")
+    @PostMapping("/create")
     public Loja createLoja(@RequestBody Loja loja) {
         return lojaRepository.save(loja);
     }
@@ -49,6 +49,11 @@ public class LojaController {
         Loja loja = lojaRepository.findById(lojaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
         return loja.getRegistos();
+    }
+
+    @GetMapping("/registosHora/{hora}")
+    public List<Registo> getLojaRegistosHora(@PathVariable(value = "hora") Long hora) {
+        return lojaRepository.findRegistoLastHour(hora);
     }
 
 }
