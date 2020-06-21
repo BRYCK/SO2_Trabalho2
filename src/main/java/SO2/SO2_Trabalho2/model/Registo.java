@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "registo")
 public class Registo {
@@ -57,6 +59,7 @@ public class Registo {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     public Loja getLoja() {
         return this.loja;
     }

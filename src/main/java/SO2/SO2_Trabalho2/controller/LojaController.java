@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
@@ -51,9 +52,10 @@ public class LojaController {
         return loja.getRegistos();
     }
 
-    @GetMapping("/registosHora/{hora}")
-    public List<Registo> getLojaRegistosHora(@PathVariable(value = "hora") Long hora) {
-        return lojaRepository.findRegistoLastHour(hora);
+    @GetMapping("/registosHora")
+    public List<Registo> getLojaRegistosHora(@RequestParam(value = "hora") Long hora,
+            @RequestParam(value = "lojaId") Long lojaId) {
+        return lojaRepository.findRegistoLastHour(hora, lojaId);
     }
 
 }
