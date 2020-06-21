@@ -17,14 +17,17 @@ public class Utilizador {
 
     private long id;
     private String utilizador;
+    private String password;
     private Role role;
 
     public Utilizador() {
 
     }
 
-    public Utilizador(String utilizador) {
+    public Utilizador(String utilizador, String password, Role role) {
         this.utilizador = utilizador;
+        this.password = password;
+        this.role = role;
     }
 
     @Id
@@ -53,6 +56,15 @@ public class Utilizador {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Column(name = "password", nullable = false)
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

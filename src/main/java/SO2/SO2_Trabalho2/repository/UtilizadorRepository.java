@@ -8,4 +8,6 @@ import SO2.SO2_Trabalho2.model.Utilizador;
 @Repository
 public interface UtilizadorRepository extends JpaRepository<Utilizador, Long> {
 
+    Utilizador findByUtilizador(String username);
+
 }
