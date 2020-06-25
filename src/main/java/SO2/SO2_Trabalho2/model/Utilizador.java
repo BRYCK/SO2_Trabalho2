@@ -18,13 +18,13 @@ public class Utilizador {
     private long id;
     private String utilizador;
     private String password;
-    private Role role;
+    private String role;
 
     public Utilizador() {
 
     }
 
-    public Utilizador(String utilizador, String password, Role role) {
+    public Utilizador(String utilizador, String password, String role) {
         this.utilizador = utilizador;
         this.password = password;
         this.role = role;
@@ -49,12 +49,12 @@ public class Utilizador {
         this.utilizador = utilizador;
     }
 
-    @Enumerated(EnumType.STRING)
-    public Role getRole() {
+    @Column(name = "role", nullable = false)
+    public String getRole() {
         return this.role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
