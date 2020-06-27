@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,6 +63,7 @@
           }
         }
         </style>
+        
         </head>
 <body>
     <div class="topnav" id="myTopnav">
@@ -83,7 +87,7 @@
       }
       </script>
       
-<center><h1>Bem-Vindo!</h1></center>
+<center><h1>Bem-Vindo [[${#httpServletRequest.remoteUser}]]!</h1></center>
 <p>Esta web-app tem como objetivo ajudar as regras de distanciamento impostas atualmente nos cidadãos para que possam melhor eftuar as suas compras.<br>
 Para tal, trabalhamos com várias lojas para que qualquer cidadão possa saber quão cheia está uma determinada loja neste momento.<br>
 Para aceder ao nosso serviço, por favor clique no botão abaixo:</p>
@@ -98,5 +102,28 @@ Para aceder ao nosso serviço, por favor clique no botão abaixo:</p>
     <label for="lname"> Password:</label><br>
     <input type="text" id="lname" name="lname">
   </form> 
+
+  <form action="/result" th:action="@{/utilizador/add}" th:object="${utilizador}" method="post">
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+          <label>Utilizador</label>
+          <input type="text" class="form-control" id="user" th:field="*{utilizador}">
+      </div>
+      <div class="col-md-6 form-group">
+          <label>Title</label>
+          <input type="password" class="form-control" id="password" th:field="*{password}">
+      </div>
+      <div class="col-md-6 form-group">
+          <label>Type</label>
+          <select class="form-control" id="role" th:field="*{role}">
+              <option value="">Choose...</option>
+              <option value="ADMIN">ADMIN</option>
+              <option value="USER">USER</option>
+              <option value="GUEST">GUEST</option>
+          </select>
+      </div>
+    <input type="submit" value="Submit" />
+  </div>
+  </form>
 </body>
 </html>

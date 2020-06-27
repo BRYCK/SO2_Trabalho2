@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,12 +32,12 @@ public class UtilizadorController {
     @Autowired
     private UtilizadorRepository utilizadorRepository;
 
-    @GetMapping("/utilizadors")
+    @GetMapping("/show")
     public List<Utilizador> getAllUtilizadors() {
         return utilizadorRepository.findAll();
     }
 
-    @GetMapping("/utilizadors/{id}")
+    @GetMapping("/show/{id}")
     public ResponseEntity<Utilizador> getUtilizadorById(@PathVariable(value = "id") Long utilizadorId)
             throws ResourceNotFoundException {
         Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
@@ -44,12 +45,15 @@ public class UtilizadorController {
         return ResponseEntity.ok().body(utilizador);
     }
 
-    @PostMapping("/utilizadors")
-    public Utilizador createUtilizador(@RequestBody Utilizador utilizador) {
-        return utilizadorRepository.save(utilizador);
+    @PostMapping("/add")
+    public String createUtilizador(@ModelAttribute Utilizador utilizador) {
+        utilizador.setPassword(passwordEncoder.encode(utilizador.getPassword()));
+        utilizadorRepository.save(utilizador);
+        return "redirect:/result";
+
     }
 
-    @PutMapping("/utilizadors/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Utilizador> updateUtilizador(@PathVariable(value = "id") Long utilizadorId,
             @RequestBody Utilizador utilizadorDetails) throws ResourceNotFoundException {
         Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
@@ -60,7 +64,7 @@ public class UtilizadorController {
         return ResponseEntity.ok(updatedutilizador);
     }
 
-    @DeleteMapping("/utilizadors/{id}")
+    @DeleteMapping("/delete/{id}")
     public Map<String, Boolean> deleteUtilizador(@PathVariable(value = "id") Long utilizadorId)
             throws ResourceNotFoundException {
         Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
