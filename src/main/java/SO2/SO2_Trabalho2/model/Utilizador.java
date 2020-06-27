@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import SO2.SO2_Trabalho2.enumAux.Role;
-
 @Entity
 @Table(name = "utilizador")
 public class Utilizador {

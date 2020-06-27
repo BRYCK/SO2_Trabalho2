@@ -42,4 +42,9 @@ public class HomeController {
         return "result";
     }
 
+    @GetMapping("/utilizadores")
+    public String utilizadores() {
+        return "utilizadores";
+    }
+
 }

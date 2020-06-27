@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
-import SO2.SO2_Trabalho2.enumAux.Role;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
 import SO2.SO2_Trabalho2.model.Utilizador;
 
