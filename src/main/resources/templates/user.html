@@ -70,7 +70,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <body>
     <div class="topnav" id="myTopnav">
         <a href="/home" class="active"><i class="fa fa-fw fa-home"></i> Home</a> <!-- Pôr os links aqui-->
-        <a href="#about">About</a>
+        <div sec:authorize="hasAuthority('ADMIN')"><a href="#about">About</a></div>
+        <div sec:authorize="hasAuthority('GUEST')"><a href="#about">asda</a></div>
         <a href="javascript:void(0);" class="icon" onclick="responsive()">
             <i class="fa fa-bars"></i>
           </a>
