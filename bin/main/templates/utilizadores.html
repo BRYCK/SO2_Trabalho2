@@ -2,10 +2,10 @@
 <body>
 <ul>
     <li th:each="Utilizador : ${utilizadores}">
-      <span th:text= ${Utilizador.utilizador}>Default</span> com o role <span th:text= ${Utilizador.role}>Default</span>  
-      <form th:action="@{/utilizador/delete/${Utilizador.id}" th:object="${Utilizador}" method="delete">
+      <span th:text= ${Utilizador.utilizador}>Default</span> com o role <span th:text= ${Utilizador.role}>Default</span> <td><a th:href="@{/utilizador/delete/{id}(id=${Utilizador.id})}">Delete</a></td>
+      <!--<form th:action="@{/utilizador/delete/${Utilizador.id}" th:object="${Utilizador}" method="delete">
         <input type="hidden" th:field="${Utilizador.id}"/>
-        <button type="submit" value="Submit" class="btn btn-danger">Delete</button>
+        <button type="submit" value="Submit" class="btn btn-danger">Delete</button>-->
     </form>
       
     </li>
