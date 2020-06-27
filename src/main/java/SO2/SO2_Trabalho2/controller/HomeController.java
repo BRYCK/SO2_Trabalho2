@@ -42,9 +42,9 @@ public class HomeController {
         return "result";
     }
 
-    @GetMapping("/utilizadores")
-    public String utilizadores() {
-        return "utilizadores";
+    @GetMapping("/utilizadores2")
+    public String utilizadores2() {
+        return "utilizadores2";
     }
 
 }
