@@ -3,7 +3,6 @@ package SO2.SO2_Trabalho2.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import SO2.SO2_Trabalho2.model.Utilizador;
@@ -13,7 +12,7 @@ import SO2.SO2_Trabalho2.model.Utilizador;
 public class HomeController {
 
     @GetMapping("/")
-    public String red(){
+    public String red() {
         return "home";
     }
 
@@ -39,9 +38,8 @@ public class HomeController {
     }
 
     @GetMapping("/result")
-    public String result(){
+    public String result() {
         return "result";
     }
-
 
 }
