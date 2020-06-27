@@ -1,40 +1,70 @@
 <!DOCTYPE html>
 <html
-xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="https://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link th:if="${mode == 'development'}" rel="stylesheet" href="/css/bootstrap.css" th:ref="@{/bootstrap.css}">
-        <link th:if="${mode == 'production'}" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/bootstrap.min.css}">
-    </head>
-<body>
-<center><h1>Bem-Vindo [[${#httpServletRequest.remoteUser}]]!</h1></center>
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      th:if="${mode == 'development'}"
+      rel="stylesheet"
+      href="/css/bootstrap.css"
+      th:ref="@{/bootstrap.css}"
+    />
+    <link
+      th:if="${mode == 'production'}"
+      rel="stylesheet"
+      href="/css/bootstrap.min.css"
+      th:href="@{/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <center><h1>Bem-Vindo [[${#httpServletRequest.remoteUser}]]!</h1></center>
 
- <form th:action="@{/utilizador/add}" th:object="${utilizador}" method="post">
-    <div class="form-row">
-      <div class="col-md-6 form-group">
+    <form
+      th:action="@{/utilizador/add}"
+      th:object="${utilizador}"
+      method="post"
+    >
+      <div class="form-row">
+        <div class="col-md-6 form-group">
           <label>Utilizador</label>
-          <input type="text" class="form-control" id="user" th:field="*{utilizador}">
-      </div>
-      <div class="col-md-6 form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="user"
+            th:field="*{utilizador}"
+          />
+        </div>
+        <div class="col-md-6 form-group">
           <label>Title</label>
-          <input type="password" class="form-control" id="password" th:field="*{password}">
-      </div>
-      <div class="col-md-6 form-group">
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            th:field="*{password}"
+          />
+        </div>
+        <div class="col-md-6 form-group">
           <label>Type</label>
           <select class="form-control" id="role" th:field="*{role}">
-              <option value="">Choose...</option>
-              <option value="ADMIN">ADMIN</option>
-              <option value="USER">USER</option>
-              <option value="GUEST">GUEST</option>
+            <option value="">Choose...</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+            <option value="GUEST">GUEST</option>
           </select>
+        </div>
+        <input type="submit" value="Submit" />
       </div>
-    <input type="submit" value="Submit" />
-  </div>
-  </form>
+    </form>
 
-  <a th:href="@{utilizador/show}">Clique aqui para ver todos os utilizadores</a>
-</body>
+    <a th:href="@{utilizador/show}"
+      >Clique aqui para ver todos os utilizadores</a
+    >
+  </body>
 </html>
