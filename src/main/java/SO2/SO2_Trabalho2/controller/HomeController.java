@@ -43,5 +43,10 @@ public class HomeController {
         return "result";
     }
 
+    @GetMapping("/seeAll")
+    public String seeAll(){
+        return "seeAll";
+    }
+
 
 }
