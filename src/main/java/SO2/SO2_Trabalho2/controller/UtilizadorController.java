@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
+import SO2.SO2_Trabalho2.enumAux.Role;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
 import SO2.SO2_Trabalho2.model.Utilizador;
 
@@ -32,9 +34,10 @@ public class UtilizadorController {
     @Autowired
     private UtilizadorRepository utilizadorRepository;
 
-    @GetMapping("/show")
-    public List<Utilizador> getAllUtilizadors() {
-        return utilizadorRepository.findAll();
+    @RequestMapping("/show")
+    public String getAllUtilizadors(Model model) {
+        model.addAttribute("utilizadores", utilizadorRepository.findAll());
+        return "utilizadores";
     }
 
     @GetMapping("/show/{id}")
@@ -65,15 +68,13 @@ public class UtilizadorController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public Map<String, Boolean> deleteUtilizador(@PathVariable(value = "id") Long utilizadorId)
+    public String deleteUtilizador(@PathVariable(value = "id") Long utilizadorId)
             throws ResourceNotFoundException {
         Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
                 () -> new ResourceNotFoundException("utilizador not found for this id :: " + utilizadorId));
 
         utilizadorRepository.delete(utilizador);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return "utilizadores";
     }
 
     @GetMapping("/INIT")
