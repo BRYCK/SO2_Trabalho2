@@ -29,9 +29,9 @@
                 ><i class="fa fa-home"></i>Home</a
               >
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/}"
-                >Profile</a
+            <li sec:authorize="permitAll()" class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/loja/registosAll}"
+                >Lojas</a
               >
             </li>
             <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
@@ -41,15 +41,23 @@
               sec:authorize="hasAnyAuthority('ADMIN','USER')"
               class="nav-item"
             >
-              <a class="nav-link" href="#" th:href="@{/}"
-                >Management</a
-              >
+              <a class="nav-link" href="#" th:href="@{/}">Management</a>
             </li>
           </ul>
-          <form sec:authorize="isAuthenticated()" class="btn btn-primary" th:action="@{/logout}" method="post">
-            <input type="submit" value="Log Out"/>
+          <form
+            sec:authorize="isAuthenticated()"
+            class="btn btn-primary"
+            th:action="@{/logout}"
+            method="post"
+          >
+            <input type="submit" value="Log Out" />
           </form>
-          <a sec:authorize="isAnonymous()" class="btn btn-primary" th:href="@{/login}">Log In</a>
+          <a
+            sec:authorize="isAnonymous()"
+            class="btn btn-primary"
+            th:href="@{/login}"
+            >Log In</a
+          >
         </div>
       </nav>
     </div>

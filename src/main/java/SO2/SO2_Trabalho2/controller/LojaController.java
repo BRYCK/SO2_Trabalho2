@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,34 +29,40 @@ public class LojaController {
     @Autowired
     private LojaRepository lojaRepository;
 
-    @GetMapping("/getAll")
+    @RequestMapping("/getAll")
     public List<Loja> getAllLojas() {
         return lojaRepository.findAll();
     }
 
-    @GetMapping("/get/{id}")
+    @RequestMapping("/get/{id}")
     public ResponseEntity<Loja> getLojaById(@PathVariable(value = "id") Long lojaId) throws ResourceNotFoundException {
         Loja loja = lojaRepository.findById(lojaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
         return ResponseEntity.ok().body(loja);
     }
 
-    @PostMapping("/create")
-    public Loja createLoja(@RequestBody Loja loja) {
-        return lojaRepository.save(loja);
+    @RequestMapping("/add")
+    public String createLoja(@ModelAttribute Loja loja) {
+        lojaRepository.save(loja);
+        return "redirect:/result";
     }
 
-    @GetMapping("/registos/{id}")
+    @RequestMapping("/registos/{id}")
     public List<Registo> getLojaRegistos(@PathVariable(value = "id") Long lojaId) throws ResourceNotFoundException {
         Loja loja = lojaRepository.findById(lojaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
         return loja.getRegistos();
     }
 
-    @GetMapping("/registosHora")
+    @RequestMapping("/registosHora")
     public List<Registo> getLojaRegistosHora(@RequestParam(value = "hora") Long hora,
             @RequestParam(value = "lojaId") Long lojaId) {
         return lojaRepository.findRegistoLastHour(hora, lojaId);
     }
 
+    @RequestMapping("/registosAll")
+    public String getAllUtilizadors(Model model) {
+        model.addAttribute("lojas", lojaRepository.findAll());
+        return "lojas";
+    }
 }

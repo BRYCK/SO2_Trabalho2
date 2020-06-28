@@ -25,12 +25,12 @@ public class RegistoController {
     @Autowired
     private RegistoRepository registoRepository;
 
-    @GetMapping("/getAll")
+    @RequestMapping("/getAll")
     public List<Registo> getAllRegistos() {
         return registoRepository.findAll();
     }
 
-    @GetMapping("/get/{id}")
+    @RequestMapping("/get/{id}")
     public ResponseEntity<Registo> getRegistoById(@PathVariable(value = "id") Long registoId)
             throws ResourceNotFoundException {
         Registo registo = registoRepository.findById(registoId)
@@ -38,7 +38,7 @@ public class RegistoController {
         return ResponseEntity.ok().body(registo);
     }
 
-    @PostMapping("/create")
+    @RequestMapping("/create")
     public Registo createRegisto(@RequestBody Registo registo) {
         return registoRepository.save(registo);
     }
