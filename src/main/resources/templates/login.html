@@ -22,7 +22,7 @@
         <div class="card">
           <div class="card-header"><i class="fa fa-user"></i> Please Login</div>
           <div class="card-block" style="padding: 24px;">
-            <form name="f" th:action="@{/signin}" method="post">
+            <form name="f" th:action="@{/login}" method="post">
               <fieldset>
                 <!-- Thymeleaf + Spring Security error display -->
                 <div th:if="${param.error}" class="alert alert-danger">
@@ -39,8 +39,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="txtUsername"
-                    name="txtUsername"
+                    name="username"
                     placeholder="Username"
                   />
                 </div>
@@ -50,8 +49,7 @@
                   <input
                     type="password"
                     class="form-control"
-                    id="txtPassword"
-                    name="txtPassword"
+                    name="password"
                     placeholder="Password"
                   />
                 </div>

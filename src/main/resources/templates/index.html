@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head
-    th:insert="fragments.html :: headerfiles"
+    th:insert="fragments.html :: headerfiles">
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
     crossorigin="anonymous"
-  >
-    >
+    />
   </head>
   <body>
     <header th:insert="fragments.html :: nav"></header>
     <!-- Page content goes here -->
     <div class="container">
       <div class="jumbotron">
-        <h1 class="display-4">Hello, Spring Boot Security!</h1>
+        <h1 sec:authorize="isAuthenticated()" class="display-4">Hello, [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h1 sec:authorize="isAnonymous()" class="display-4">Hello, Guest!</h1>
         <p class="lead">
           This is the home page of our web application. Anyone can access it,
           even if they have not signed in.

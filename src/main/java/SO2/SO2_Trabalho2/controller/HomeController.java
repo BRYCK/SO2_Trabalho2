@@ -27,15 +27,10 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-
-    @GetMapping("/user")
+    @GetMapping("/admin")
     public String user(Model model) {
         model.addAttribute("utilizador", new Utilizador());
-        return "user";
+        return "admin";
     }
 
     @GetMapping("/result")
