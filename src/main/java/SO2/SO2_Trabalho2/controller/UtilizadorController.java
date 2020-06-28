@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
+import SO2.SO2_Trabalho2.model.Loja;
 import SO2.SO2_Trabalho2.model.Utilizador;
 
 @Controller
@@ -34,8 +35,9 @@ public class UtilizadorController {
     private UtilizadorRepository utilizadorRepository;
 
     @RequestMapping("/show")
-    public String getAllUtilizadors(Model model) {
+    public String getAllUtilizadors(Model model, Model model2) {
         model.addAttribute("utilizadores", utilizadorRepository.findAll());
+        model2.addAttribute("loja", new Loja());
         return "utilizadores2";
     }
 
@@ -67,8 +69,7 @@ public class UtilizadorController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteUtilizador(@PathVariable(value = "id") Long utilizadorId)
-            throws ResourceNotFoundException {
+    public String deleteUtilizador(@PathVariable(value = "id") Long utilizadorId) throws ResourceNotFoundException {
         Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
                 () -> new ResourceNotFoundException("utilizador not found for this id :: " + utilizadorId));
 

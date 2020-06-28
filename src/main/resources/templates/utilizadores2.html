@@ -76,7 +76,7 @@ div.mytable {
                     />
                   </div>
                   <div class="form-group">
-                    <label for="localLoja">Tamanho</label>
+                    <label for="localLoja">Local</label>
                     <input
                       type="text"
                       class="form-control"
@@ -89,8 +89,8 @@ div.mytable {
                     type="hidden"
                     id="Utilizador"
                     name="Utilizador"
-                    th:field="*{Utilizador}"
-                    value="${Utilizador.id}"
+                    th:name="*{Utilizador}"
+                    value="${Utilizador}"
                     />
                   </div>
                   <button type="submit" class="btn btn-primary">Create</button>
