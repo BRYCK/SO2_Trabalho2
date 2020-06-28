@@ -107,47 +107,6 @@
         }
       }
     </script>
-    <center><h1>Bem-Vindo [[${#httpServletRequest.remoteUser}]]!</h1></center>
-
-    <form
-      th:action="@{/utilizador/add}"
-      th:object="${utilizador}"
-      method="post"
-    >
-      <div class="form-row">
-        <div class="col-md-6 form-group">
-          <label>Utilizador</label>
-          <input
-            type="text"
-            class="form-control"
-            id="user"
-            th:field="*{utilizador}"
-          />
-        </div>
-        <div class="col-md-6 form-group">
-          <label>Title</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            th:field="*{password}"
-          />
-        </div>
-        <div class="col-md-6 form-group">
-          <label>Type</label>
-          <select class="form-control" id="role" th:field="*{role}">
-            <option value="">Choose...</option>
-            <option value="ADMIN">ADMIN</option>
-            <option value="USER">USER</option>
-            <option value="GUEST">GUEST</option>
-          </select>
-        </div>
-        <input type="submit" value="Submit" />
-      </div>
-    </form>
-
-    <a th:href="@{utilizador/show}"
-      >Clique aqui para ver todos os utilizadores</a
-    >
+    
   </body>
 </html>
