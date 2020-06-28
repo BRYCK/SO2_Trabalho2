@@ -1,65 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    
-  </head>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:insert="fragments.html :: headerfiles"></head>
   <body>
-    <nav class="navbar navbar-light bg-light static-top">
-        <a class="navbar-brand" th:href="@{/home}">Home Page</a>
-        <a class="btn btn-primary" th:href="@{/login}">Log In</a>
-    </nav>
-  
-    <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Kill urself [[${#httpServletRequest.remoteUser}]]!</h1>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+    <header th:insert="fragments.html :: nav"></header>
+    <!-- Page content goes here -->
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-4">Hello, Spring Boot Security!</h1>
+        <p class="lead">
+          This is the home page of our web application. Anyone can access it,
+          even if they have not signed in.
+        </p>
+        <hr class="my-4" />
+        <p>
+          Using this example, you will become more familiar with Spring Security
+          concepts:)
+        </p>
+        <p class="lead">
+          <a
+            class="btn btn-primary btn-lg"
+            href="https://spring.io/projects/spring-security"
+            role="button"
+            >Learn more about Spring Security</a
+          >
+        </p>
       </div>
-    </header>
-    <!--
-    <div class="topnav" id="myTopnav">
-        
-        <div sec:authorize="hasAuthority('ADMIN')"><a href="#about">About</a></div>
-        <div sec:authorize="hasAuthority('GUEST')"><a href="#about">asda</a></div>
-        <div sec:authorize="hasAnyAuthority('ADMIN','USER')"><a href="/logout">Log-out</a></div>
-        <div sec:authorize="hasAuthority('GUEST')"><a href="/login">Log-in</a></div>
-        <a href="javascript:void(0);" class="icon" onclick="responsive()">
-            <i class="fa fa-bars"></i>
-          </a>
-      </div>
-        <script>
-      function responsive() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-          x.className += " responsive";
-        } else {
-          x.className = "topnav";
-        }
-      }
-      </script>
-    -->
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </div>
   </body>
 </html>

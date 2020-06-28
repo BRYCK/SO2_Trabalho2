@@ -13,13 +13,13 @@ import SO2.SO2_Trabalho2.model.Utilizador;
 public class HomeController {
 
     @GetMapping("/")
-    public String red(){
-        return "home";
+    public String red() {
+        return "index";
     }
 
     @GetMapping("/home")
     public String home() {
-        return "home";
+        return "index";
     }
 
     @GetMapping("/login")
@@ -39,9 +39,13 @@ public class HomeController {
     }
 
     @GetMapping("/result")
-    public String result(){
+    public String result() {
         return "result";
     }
 
+    @GetMapping("/utilizadores2")
+    public String utilizadores2() {
+        return "utilizadores2";
+    }
 
 }
