@@ -77,8 +77,8 @@ div.mytable {
                       th:field="*{local}"
                     />
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label>Tamanho</label>
+                  <div class="form-group">
+                    <label for="localLoja">Local</label>
                     <input
                       type="text"
                       class="form-control"
@@ -88,11 +88,11 @@ div.mytable {
                   </div>
                   <div class="col-md-6 form-group">
                     <input
-                      type="hidden"
-                      class="form-control"
-                      id="Utilizador"
-                      th:field="*{Utilizador}"
-                      value="${Utilizador.id}"
+                    type="hidden"
+                    id="Utilizador"
+                    name="Utilizador"
+                    th:name="*{Utilizador}"
+                    value="${Utilizador}"
                     />
                   </div>
                   <input type="submit" value="Submit" />

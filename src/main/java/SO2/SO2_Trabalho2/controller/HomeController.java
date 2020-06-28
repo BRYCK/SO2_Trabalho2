@@ -48,7 +48,8 @@ public class HomeController {
     }
 
     @GetMapping("/utilizadores2")
-    public String utilizadores2() {
+    public String utilizadores2(Model model) {
+        model.addAttribute("loja", new Loja());
         return "utilizadores2";
     }
 
