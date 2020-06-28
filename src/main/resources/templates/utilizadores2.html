@@ -55,21 +55,43 @@ div.mytable {
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <form class="px-4 py-3" 
                 th:action="@{/loja/add}"
-                th:object="${utilizador}"
+                th:object="${loja}"
                 method="post">
+                  <label for="nomeLoja">Nome</label>
                   <div class="form-group">
-                    <label for="exampleDropdownFormEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                    <input
+                    type="text"
+                    class="form-control"
+                    id="nome"
+                    th:field="*{nome}"
+                    />
                   </div>
                   <div class="form-group">
-                    <label for="exampleDropdownFormPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                    <label for="tamanhoLoja">Tamanho</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tamanho"
+                      th:field="*{tamanho}"
+                    />
                   </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                    <label class="form-check-label" for="dropdownCheck">
-                      Remember me
-                    </label>
+                  <div class="form-group">
+                    <label for="localLoja">Tamanho</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="local"
+                      th:field="*{local}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                    type="hidden"
+                    id="Utilizador"
+                    name="Utilizador"
+                    th:field="*{Utilizador}"
+                    value="${Utilizador.id}"
+                    />
                   </div>
                   <button type="submit" class="btn btn-primary">Create</button>
                 </form>
