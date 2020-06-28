@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,7 +41,11 @@ public class LojaController {
         return ResponseEntity.ok().body(loja);
     }
 
+<<<<<<< HEAD
     @RequestMapping("/create")
+=======
+    @RequestMapping("/add")
+>>>>>>> 97233510d5a9ecb6a80f099186f3bcf5c5ac4b4e
     public String createLoja(@ModelAttribute Loja loja) {
         lojaRepository.save(loja);
         return "redirect:/result";
@@ -59,4 +64,9 @@ public class LojaController {
         return lojaRepository.findRegistoLastHour(hora, lojaId);
     }
 
+    @RequestMapping("/registosAll")
+    public String getAllUtilizadors(Model model) {
+        model.addAttribute("lojas", lojaRepository.findAll());
+        return "lojas";
+    }
 }

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import SO2.SO2_Trabalho2.model.Loja;
+import SO2.SO2_Trabalho2.model.Registo;
 import SO2.SO2_Trabalho2.model.Utilizador;
 
 @Controller
@@ -31,6 +33,13 @@ public class HomeController {
     public String user(Model model) {
         model.addAttribute("utilizador", new Utilizador());
         return "admin";
+    }
+
+    @GetMapping("/lojas")
+    public String lojas(Model model1, Model model2) {
+        model1.addAttribute("loja", new Loja());
+        model2.addAttribute("registo", new Registo());
+        return "lojas";
     }
 
     @GetMapping("/result")
