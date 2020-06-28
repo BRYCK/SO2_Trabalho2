@@ -53,30 +53,23 @@ div.mytable {
                 Dropdown button
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <form class="px-4 py-3" 
-                th:action="@{/loja/add}"
+                <form
+                th:action="@{/loja/create}"
                 th:object="${loja}"
-                method="post">
-                  <label for="nomeLoja">Nome</label>
-                  <div class="form-group">
-                    <input
-                    type="text"
-                    class="form-control"
-                    id="nome"
-                    th:field="*{nome}"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="tamanhoLoja">Tamanho</label>
+                method="post"
+                >
+                <div class="form-row">
+                  <div class="col-md-6 form-group">
+                    <label>Loja</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="tamanho"
-                      th:field="*{tamanho}"
+                      id="nome"
+                      th:field="*{nome}"
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="localLoja">Tamanho</label>
+                  <div class="col-md-6 form-group">
+                    <label>Local</label>
                     <input
                       type="text"
                       class="form-control"
@@ -84,15 +77,27 @@ div.mytable {
                       th:field="*{local}"
                     />
                   </div>
-                  <div class="form-group">
+                  <div class="col-md-6 form-group">
+                    <label>Tamanho</label>
                     <input
-                    type="hidden"
-                    id="Utilizador"
-                    name="Utilizador"
-                    th:field="*{Utilizador}"
-                    value="${Utilizador.id}"
+                      type="text"
+                      class="form-control"
+                      id="tamanho"
+                      th:field="*{tamanho}"
                     />
                   </div>
+                  <div class="col-md-6 form-group">
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      id="Utilizador"
+                      th:field="*{Utilizador}"
+                      value="${Utilizador.id}"
+                    />
+                  </div>
+                  <input type="submit" value="Submit" />
+                </div>
+              </form>
                   <button type="submit" class="btn btn-primary">Create</button>
                 </form>
               </div>
