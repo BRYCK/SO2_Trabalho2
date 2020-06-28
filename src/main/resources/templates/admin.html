@@ -13,6 +13,12 @@
     <header th:insert="fragments.html :: nav"></header>
     <center><h1>Bem-Vindo [[${#httpServletRequest.remoteUser}]]!</h1></center>
 
+    <div class="container">
+    <div class="jumbotron"> 
+      <div class="card">
+      <div class="card-header"><i class="fa fa-user"></i> Create a new Login</div>
+      <div class="card-block" style="padding: 24px;">
+
     <form
       th:action="@{/utilizador/add}"
       th:object="${utilizador}"
@@ -29,7 +35,7 @@
           />
         </div>
         <div class="col-md-6 form-group">
-          <label>Title</label>
+          <label>Password</label>
           <input
             type="password"
             class="form-control"
@@ -49,10 +55,40 @@
         <input type="submit" value="Submit" />
       </div>
     </form>
+    </div>
+    </div>
+
+    <hr class="my-4" />
 
     <a th:href="@{utilizador/show}"
       >Clique aqui para ver todos os utilizadores</a
     >
+
+    <div class="dropdown-menu">
+      <form class="px-4 py-3">
+        <div class="form-group">
+          <label for="exampleDropdownFormEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label for="exampleDropdownFormPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="dropdownCheck">
+          <label class="form-check-label" for="dropdownCheck">
+            Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">New around here? Sign up</a>
+      <a class="dropdown-item" href="#">Forgot password?</a>
+    </div>
+    </div>
+    </div>
+  </div>
     
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
