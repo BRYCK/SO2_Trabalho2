@@ -1,5 +1,6 @@
 package SO2.SO2_Trabalho2.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ import SO2.SO2_Trabalho2.model.Utilizador;
 @RequestMapping("/registo")
 public class RegistoController {
 
+    private Date data = new Date();
+
     @Autowired
     private RegistoRepository registoRepository;
 
@@ -50,17 +53,20 @@ public class RegistoController {
         return ResponseEntity.ok().body(registo);
     }
 
-    @RequestMapping("/create/{utilizador}")
+    @RequestMapping("/add/{utilizador}")
     public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value = "utilizador") String username) {
         Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(username));
         registo.setLoja(loja);
+
+        registo.setData(data.getTime());
         registoRepository.save(registo);
         return "redirect:/mystore";
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteUtilizador(@PathVariable(value = "id") Long registoId) {
-        Registo registo = registoRepository.findById(registoId).get();
+    public String deleteUtilizador(@PathVariable(value = "id") Long registoId) throws ResourceNotFoundException {
+        Registo registo = registoRepository.findById(registoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Registo not found for this id :: " + registoId));
 
         registoRepository.delete(registo);
         return "redirect:/";

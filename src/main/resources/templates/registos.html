@@ -21,9 +21,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="Registo : ${registos}" th:object="${utilizador}">
+        <tr th:each="Registo : ${registos}" th:object="${registo}">
+          <td th:text="${Registo.id}"></td>
           <td th:text="${Registo.data}"></td>
-          <td th:text="${Registo.ocupacao"></td>
+          <td th:text="${Registo.ocupacao}"></td>
           <td>
             <a th:href="@{/registo/delete/{id}(id=${Registo.id})}"
               ><button>Delete</button></a

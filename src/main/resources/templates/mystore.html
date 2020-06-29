@@ -26,26 +26,8 @@
         >
           <div class="form-row">
             <div class="col-md-6 form-group">
-              <label>Utilizador</label>
-              <input
-                type="text"
-                class="form-control"
-                id="user"
-                th:field="*{utilizador}"
-              />
-            </div>
-            <div class="col-md-6 form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                th:field="*{password}"
-              />
-            </div>
-            <div class="col-md-6 form-group">
               <label>Ocupação</label>
-              <select class="form-control" id="role" th:field="*{role}">
+              <select class="form-control" id="role" th:field="*{ocupacao}">
                 <option value="">Choose...</option>
                 <option value="Vazio/Lotação minima">Vazio/Lotação minima</option>
                 <option value="Com pessoas, mas espaço suficiente">Com pessoas, mas espaço suficiente</option>

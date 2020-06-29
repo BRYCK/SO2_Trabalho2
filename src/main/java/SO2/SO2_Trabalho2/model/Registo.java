@@ -43,11 +43,14 @@ public class Registo {
     public void setId(long id) {
         this.id = id;
     }
-    
-    @DateTimeFormat(pattern="dd-MMM-YYYY")
+
     @Column(name = "data", nullable = false)
     public Date getData() {
         return this.data;
+    }
+
+    public void setData(long data) {
+        this.data = new Date(data);
     }
 
     public void setData(Date data) {

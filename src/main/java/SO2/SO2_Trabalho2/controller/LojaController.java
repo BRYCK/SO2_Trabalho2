@@ -76,6 +76,8 @@ public class LojaController {
     @RequestMapping("/registos/{utilizador}")
     public String requestMethodName(@PathVariable(value = "utilizador") String utilizadorNome, Model model) {
         Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(utilizadorNome));
+        // System.out.println(loja.getRegistos());
+
         model.addAttribute("registos", loja.getRegistos());
 
         return "registos";
