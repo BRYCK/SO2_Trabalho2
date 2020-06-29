@@ -15,9 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import SO2.SO2_Trabalho2.repository.LojaRepository;
 import SO2.SO2_Trabalho2.repository.RegistoRepository;
+import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
+import SO2.SO2_Trabalho2.model.Loja;
 import SO2.SO2_Trabalho2.model.Registo;
+import SO2.SO2_Trabalho2.model.Utilizador;
 
 @Controller
 @RequestMapping("/registo")
@@ -25,6 +30,12 @@ public class RegistoController {
 
     @Autowired
     private RegistoRepository registoRepository;
+
+    @Autowired
+    private LojaRepository lojaRepository;
+
+    @Autowired
+    private UtilizadorRepository utilizadorRepository;
 
     @RequestMapping("/getAll")
     public List<Registo> getAllRegistos() {
@@ -40,7 +51,9 @@ public class RegistoController {
     }
 
     @RequestMapping("/create/{utilizador}")
-    public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value="utilizador") String username) {
+    public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value = "utilizador") String username) {
+        Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(username));
+        registo.setLoja(loja);
         registoRepository.save(registo);
         return "redirect:/mystore";
     }

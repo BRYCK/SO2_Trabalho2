@@ -58,4 +58,10 @@ public class HomeController {
         return "mapa";
     }
 
+    @GetMapping("/mystore")
+    public String mystore(Model model) {
+        model.addAttribute("registo", new Registo())
+        return "mystore";
+    }
+
 }
