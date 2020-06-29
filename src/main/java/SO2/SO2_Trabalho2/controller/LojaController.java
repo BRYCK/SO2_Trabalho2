@@ -23,6 +23,7 @@ import SO2.SO2_Trabalho2.model.Registo;
 import SO2.SO2_Trabalho2.model.Utilizador;
 import SO2.SO2_Trabalho2.repository.LojaRepository;
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/loja")
@@ -53,7 +54,7 @@ public class LojaController {
         return "redirect:/result";
     }
 
-    @RequestMapping("/registos/{id}")
+    @RequestMapping("/registossssss/{id}")
     public List<Registo> getLojaRegistos(@PathVariable(value = "id") Long lojaId) throws ResourceNotFoundException {
         Loja loja = lojaRepository.findById(lojaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
@@ -67,9 +68,17 @@ public class LojaController {
     }
 
     @RequestMapping("/registosAll")
-    public String getAllUtilizadors(Model model) {
+    public String getLojasUtilizadores(Model model) {
         model.addAttribute("lojas", lojaRepository.findAll());
         return "lojas";
+    }
+
+    @RequestMapping("/registos/{utilizador}")
+    public String requestMethodName(@PathVariable(value = "utilizador") String utilizadorNome, Model model) {
+        Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(utilizadorNome));
+        model.addAttribute("registos", loja.getRegistos());
+
+        return "registos";
     }
 
 }

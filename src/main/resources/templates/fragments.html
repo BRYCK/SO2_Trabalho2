@@ -34,8 +34,16 @@
                 >Lojas</a
               >
             </li>
+            <li sec:authorize="permitAll()" class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/mapa}">Mapa</a>
+            </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/}">Registos</a>
+              <a
+                class="nav-link"
+                href="#"
+                th:href="@{/loja/registos/{utilizador}(utilizador=${#authentication.getPrincipal().getUsername()})}"
+                >Registos</a
+              >
             </li>
             <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
               <a class="nav-link" th:href="@{/admin}">Admin</a>

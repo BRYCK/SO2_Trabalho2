@@ -43,4 +43,12 @@ public class RegistoController {
         return registoRepository.save(registo);
     }
 
+    @RequestMapping("/delete/{id}")
+    public String deleteUtilizador(@PathVariable(value = "id") Long registoId) {
+        Registo registo = registoRepository.findById(registoId).get();
+
+        registoRepository.delete(registo);
+        return "redirect:/";
+    }
+
 }
