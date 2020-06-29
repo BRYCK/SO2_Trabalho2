@@ -64,11 +64,14 @@ public class RegistoController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteUtilizador(@PathVariable(value = "id") Long registoId) throws ResourceNotFoundException {
-        Registo registo = registoRepository.findById(registoId)
-                .orElseThrow(() -> new ResourceNotFoundException("Registo not found for this id :: " + registoId));
+    public String deleteRegisto(@PathVariable(value = "id") Long registoId) throws ResourceNotFoundException {
+        // Registo registo = registoRepository.findById(registoId)
+        // .orElseThrow(() -> new ResourceNotFoundException("Registo not found for this
+        // id :: " + registoId));
 
-        registoRepository.delete(registo);
+        System.out.println(registoId);
+
+        registoRepository.deleteById(registoId);
         return "redirect:/";
     }
 

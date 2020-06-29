@@ -23,6 +23,7 @@ import SO2.SO2_Trabalho2.model.Loja;
 import SO2.SO2_Trabalho2.model.Registo;
 import SO2.SO2_Trabalho2.model.Utilizador;
 import SO2.SO2_Trabalho2.repository.LojaRepository;
+import SO2.SO2_Trabalho2.repository.RegistoRepository;
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,6 +36,9 @@ public class LojaController {
 
     @Autowired
     private UtilizadorRepository utilizadorRepository;
+
+    @Autowired
+    private RegistoRepository registoRepository;
 
     @RequestMapping("/getAll")
     public List<Loja> getAllLojas() {
@@ -81,6 +85,19 @@ public class LojaController {
         model.addAttribute("registos", loja.getRegistos());
 
         return "registos";
+    }
+
+    @RequestMapping("/registos/delete/{id}")
+    public String deleteRegisto(@PathVariable(value = "id") Long registoId) throws ResourceNotFoundException {
+        Registo registo = registoRepository.findById(registoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Registo not found for this id :: " + registoId));
+
+        Loja loja = lojaRepository.findById(registo.getLoja().getId()).get();
+
+        loja.getRegistos().remove(registo);
+
+        lojaRepository.save(loja);
+        return "redirect:/";
     }
 
 }
