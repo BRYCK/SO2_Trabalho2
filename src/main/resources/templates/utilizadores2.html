@@ -39,7 +39,7 @@ div.mytable {
         </tr>
     </thead>
     <tbody>
-        <tr th:each="Utilizador : ${utilizadores}">
+        <tr th:each="Utilizador : ${utilizadores}" th:object="${utilizador}">
              
             <td th:text="${Utilizador.id}"></td>
             <td th:text="${Utilizador.utilizador}"></td>
@@ -54,7 +54,7 @@ div.mytable {
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <form class="px-4 py-3" 
-                th:action="@{/loja/add}"
+                th:action="@{/loja/add/{id}(id=${Utilizador.id})}"
                 th:object="${loja}"
                 method="post">
                   <label for="nomeLoja">Nome</label>
@@ -82,15 +82,6 @@ div.mytable {
                       class="form-control"
                       id="local"
                       th:field="*{local}"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                    type="hidden"
-                    id="Utilizador"
-                    name="Utilizador"
-                    th:name="*{Utilizador}"
-                    value="${Utilizador}"
                     />
                   </div>
                   <button type="submit" class="btn btn-primary">Create</button>

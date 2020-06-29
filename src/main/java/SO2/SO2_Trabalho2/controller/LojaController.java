@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
 import SO2.SO2_Trabalho2.model.Loja;
 import SO2.SO2_Trabalho2.model.Registo;
+import SO2.SO2_Trabalho2.model.Utilizador;
 import SO2.SO2_Trabalho2.repository.LojaRepository;
+import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
 
 @Controller
 @RequestMapping("/loja")
@@ -28,6 +30,9 @@ public class LojaController {
 
     @Autowired
     private LojaRepository lojaRepository;
+
+    @Autowired
+    private UtilizadorRepository utilizadorRepository;
 
     @RequestMapping("/getAll")
     public List<Loja> getAllLojas() {
@@ -41,8 +46,9 @@ public class LojaController {
         return ResponseEntity.ok().body(loja);
     }
 
-    @RequestMapping("/add")
-    public String createLoja(@ModelAttribute Loja loja) {
+    @RequestMapping("/add/{id}")
+    public String createLoja(@ModelAttribute Loja loja, @PathVariable(value = "id") Long usersId) {
+        loja.setUtilizador(utilizadorRepository.findById(usersId).get());
         lojaRepository.save(loja);
         return "redirect:/result";
     }
@@ -65,4 +71,5 @@ public class LojaController {
         model.addAttribute("lojas", lojaRepository.findAll());
         return "lojas";
     }
+
 }
