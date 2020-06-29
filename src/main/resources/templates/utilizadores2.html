@@ -39,69 +39,42 @@ div.mytable {
         </tr>
     </thead>
     <tbody>
-        <tr th:each="Utilizador : ${utilizadores}">
+        <tr th:each="user, stat : ${utilizadores}">
              
-            <td th:text="${Utilizador.id}"></td>
-            <td th:text="${Utilizador.utilizador}"></td>
-            <td th:text="${Utilizador.role}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.utilizador}"></td>
+            <td th:text="${user.role}"></td>
             <td> 
-                <a th:href="@{/utilizador/delete/{id}(id=${Utilizador.id})}"><button>Delete</button></a>
+                <a th:href="@{/utilizador/delete/{id}(id=${user.id})}"><button>Delete</button></a>
             </td>
             <td>
               <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <form
-                th:action="@{/loja/create}"
-                th:object="${loja}"
-                method="post"
-                >
-                <div class="form-row">
-                  <div class="col-md-6 form-group">
-                    <label>Loja</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="nome"
-                      th:field="*{nome}"
-                    />
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>Local</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="local"
-                      th:field="*{local}"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="localLoja">Local</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="tamanho"
-                      th:field="*{tamanho}"
-                    />
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <input
-                    type="hidden"
-                    id="Utilizador"
-                    name="Utilizador"
-                    th:name="*{Utilizador}"
-                    value="${Utilizador}"
-                    />
-                  </div>
-                  <input type="submit" value="Submit" />
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <form th:action="@{/loja/add}" th:object="${loja}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 form-group">
+                          <label  for="lojaLoja">Loja</label>
+                          <input type="text" class="form-control" id="nome" th:field="*{nome}"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label  for="localLoja">Local</label>
+                          <input type="text" class="form-control" id="local" th:field="*{local}"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label for="tamanhoLoja">Local</label>
+                          <input type="text" class="form-control" id="tamanho" th:field="*{tamanho}"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <input type="hidden"  th:attr="utilizador=@{/utilizador/show/{id}(id=${user.id})}" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                  </form>
                 </div>
-              </form>
-                  <button type="submit" class="btn btn-primary">Create</button>
-                </form>
               </div>
-
             </td>
        </tr>
      </tbody>
