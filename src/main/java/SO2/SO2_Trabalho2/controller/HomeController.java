@@ -60,7 +60,7 @@ public class HomeController {
 
     @GetMapping("/mystore")
     public String mystore(Model model) {
-        model.addAttribute("registo", new Registo())
+        model.addAttribute("registo", new Registo());
         return "mystore";
     }
 

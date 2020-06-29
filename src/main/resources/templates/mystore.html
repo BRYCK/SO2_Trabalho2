@@ -20,9 +20,9 @@
           <div class="card-block" style="padding: 24px;">
     
         <form
-          th:action="@{/registo/ad/{utilizador}(utilizador=${#authentication.getPrincipal().getUsername()})}"
-          th:object="${registo}"
-          method="post"
+            th:action="@{/registo/add/{utilizador}(utilizador=${#authentication.getPrincipal().getUsername()})}"
+            th:object="${registo}"
+            method="post"
         >
           <div class="form-row">
             <div class="col-md-6 form-group">
@@ -44,12 +44,13 @@
               />
             </div>
             <div class="col-md-6 form-group">
-              <label>Type</label>
+              <label>Ocupação</label>
               <select class="form-control" id="role" th:field="*{role}">
                 <option value="">Choose...</option>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
-                <option value="GUEST">GUEST</option>
+                <option value="Vazio/Lotação minima">Vazio/Lotação minima</option>
+                <option value="Com pessoas, mas espaço suficiente">Com pessoas, mas espaço suficiente</option>
+                <option value="Muito cheio">Muito cheio</option>
+                <option value="Muito cheio e com fila de espera">Muito cheio e com fila de espera</option>
               </select>
             </div>
             <input type="submit" value="Submit" />

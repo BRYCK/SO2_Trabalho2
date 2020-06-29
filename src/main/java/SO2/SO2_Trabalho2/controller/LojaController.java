@@ -1,5 +1,6 @@
 package SO2.SO2_Trabalho2.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,9 +63,8 @@ public class LojaController {
     }
 
     @RequestMapping("/registosHora")
-    public List<Registo> getLojaRegistosHora(@RequestParam(value = "hora") Long hora,
-            @RequestParam(value = "lojaId") Long lojaId) {
-        return lojaRepository.findRegistoLastHour(hora, lojaId);
+    public List<Registo> getLojaRegistosHora(@RequestParam(value = "lojaId") Long lojaId) {
+        return lojaRepository.findRegistoLastHour(lojaId);
     }
 
     @RequestMapping("/registosAll")

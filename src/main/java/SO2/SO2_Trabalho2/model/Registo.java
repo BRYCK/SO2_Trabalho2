@@ -1,5 +1,7 @@
 package SO2.SO2_Trabalho2.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +13,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "registo")
 public class Registo {
 
     private long id;
-    private long data;
+    private Date data;
     private String ocupacao;
     private Loja loja;
 
@@ -24,7 +28,7 @@ public class Registo {
 
     }
 
-    public Registo(long data, String ocupacao, Loja loja) {
+    public Registo(Date data, String ocupacao, Loja loja) {
         this.data = data;
         this.ocupacao = ocupacao;
         this.loja = loja;
@@ -39,13 +43,14 @@ public class Registo {
     public void setId(long id) {
         this.id = id;
     }
-
+    
+    @DateTimeFormat(pattern="dd-MMM-YYYY")
     @Column(name = "data", nullable = false)
-    public long getData() {
+    public Date getData() {
         return this.data;
     }
 
-    public void setData(long data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
