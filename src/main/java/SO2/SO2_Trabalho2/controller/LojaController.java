@@ -67,8 +67,6 @@ public class LojaController {
     @RequestMapping("/registos/{utilizador}")
     public String requestMethodName(@PathVariable(value = "utilizador") String utilizadorNome, Model model) {
         Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(utilizadorNome));
-        // System.out.println(loja.getRegistos());
-
         model.addAttribute("registos", loja.getRegistos());
 
         return "registos";
@@ -88,7 +86,7 @@ public class LojaController {
     }
 
     @RequestMapping("/registos/inf/{id}")
-    public String displayLojaInfo(@PathVariable(value="id") Long lojaId, Model modelLoja, Model modelRegistos) throws ResourceNotFoundException{
+    public String displayLojaInfo(@PathVariable(value="id") Long lojaId, Model modelLoja, Model modelRegistos, Model modelStr) throws ResourceNotFoundException{
         Loja loja = lojaRepository.findById(lojaId).orElseThrow(() -> new ResourceNotFoundException("Loja not found for this id :: " + lojaId));
         modelLoja.addAttribute("loja", loja);
 
@@ -96,6 +94,9 @@ public class LojaController {
 
         List<Registo> registosUltimahora= lojaRepository.findRegLastHour(sysdate,lojaId);
         modelRegistos.addAttribute("registosUltimaHora", registosUltimahora);
+
+        String dono=loja.getUtilizador().getUtilizador();
+        modelStr.addAttribute("dono", dono);
 
         return "lojaInfo";
         

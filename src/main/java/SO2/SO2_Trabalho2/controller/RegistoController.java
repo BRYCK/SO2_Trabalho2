@@ -37,14 +37,6 @@ public class RegistoController {
         return registoRepository.findAll();
     }
 
-    /*@RequestMapping("/get/{id}")
-    public ResponseEntity<Registo> getRegistoById(@PathVariable(value = "id") Long registoId)
-            throws ResourceNotFoundException {
-        Registo registo = registoRepository.findById(registoId)
-                .orElseThrow(() -> new ResourceNotFoundException("Registo not found for this id :: " + registoId));
-        return ResponseEntity.ok().body(registo);
-    }*/
-
     @RequestMapping("/add/{utilizador}")
     public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value = "utilizador") String username) {
         Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(username));
