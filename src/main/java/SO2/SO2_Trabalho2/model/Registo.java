@@ -1,6 +1,5 @@
 package SO2.SO2_Trabalho2.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "registo")

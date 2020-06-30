@@ -33,11 +33,12 @@ public class Loja {
 
     }
 
-    public Loja(String nome, String local, int tamanho, Utilizador utilizador) {
+    public Loja(String nome, String local, int tamanho, Utilizador utilizador, String ocupacao) {
         this.nome = nome;
         this.local = local;
         this.tamanho = tamanho;
         this.utilizador = utilizador;
+        this.ocupacao= ocupacao;
     }
 
     @Id
