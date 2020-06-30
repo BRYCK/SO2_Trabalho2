@@ -53,7 +53,7 @@ public class HomeController {
         return "utilizadores2";
     }
 
-    @GetMapping("/mapa")
+    @RequestMapping("/mapa")
     public String mapa() {
         return "mapa";
     }

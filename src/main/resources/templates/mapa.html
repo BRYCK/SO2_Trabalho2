@@ -1,50 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head th:insert="fragments.html :: headerfiles">
+<html>
+  <head>
+    <title>Mapa</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="docs/images/favicon.ico"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-    <style>
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px; /* The height is 400 pixels */
-        width: 100%; /* The width is the width of the web page */
-      }
-    </style>
   </head>
+  <header th:insert="fragments.html :: nav"></header>
   <body>
-    <header th:insert="fragments.html :: nav"></header>
+    <div id="mapid" class="w-100 p-3" style="height: 100vmax;"></div>
 
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of Uluru
-        var uluru = { lat: -25.344, lng: 131.036 };
-        // The map, centered at Uluru
-        var map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
-          center: uluru,
-        });
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({ position: uluru, map: map });
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      var mymap = L.map("mapid").setView([38.5706081, -7.9085911], 14.5);
+
+      L.tileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+        {
+          maxZoom: 18,
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+        }
+      ).addTo(mymap);
+
+      L.marker([38.5706081, -7.9085911])
+        .addTo(mymap)
+        .bindPopup("<b>Hello world!</b><br />I am a popup.");
+
+      var lojas = [[${lojas}]];
+
+      console.log(lojas);
+
+
+      lojas.forEach(setMarker);
+
+
+      function setMarker(loja){
+        console.log(loja.id);
+        var local = loja.local.split(" ");
+        var x = parseFloat(local[0]);
+        var y = parseFloat(local[1]);
+        L.marker([x, y])
+          .addTo(mymap)
+          .bindPopup("<b>loja.nome</b><br />loja.ocupacao");
       }
+
+      var popup = L.popup();
+      /*]]>*/
     </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd3sHynxtXpxA4RaC75yQKPmm4nOJRgFI&callback=initMap"
-    ></script>
 
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

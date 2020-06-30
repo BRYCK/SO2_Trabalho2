@@ -100,4 +100,10 @@ public class LojaController {
         return "redirect:/";
     }
 
+    @RequestMapping("/mapa")
+    public String getLojasMapa(Model model) {
+        model.addAttribute("lojas", lojaRepository.findAll());
+        return "mapa";
+    }
+
 }

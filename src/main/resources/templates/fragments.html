@@ -29,6 +29,9 @@
                 >Lojas</a
               >
             </li>
+            <li sec:authorize="permitAll()" class="nav-item">
+              <a class="nav-link" th:href="@{/loja/mapa}">Mapa</a>
+            </li>
             <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
               <a class="nav-link" th:href="@{/admin}">Admin</a>
             </li>
