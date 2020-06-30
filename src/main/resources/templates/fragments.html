@@ -20,29 +20,13 @@
     <!-- Fragment #2 : Navbar contains nav links -->
     <div th:fragment="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Boot Security</a>
+        <a class="navbar-brand" th:href="@{/home}">Home</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/home}"
-                ><i class="fa fa-home"></i>Home</a
-              >
-            </li>
             <li sec:authorize="permitAll()" class="nav-item">
               <a class="nav-link" href="#" th:href="@{/loja/registosAll}"
                 >Lojas</a
-              >
-            </li>
-            <li sec:authorize="permitAll()" class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/mapa}">Mapa</a>
-            </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                th:href="@{/loja/registos/{utilizador}(utilizador=${#authentication.getPrincipal().getUsername()})}"
-                >Registos</a
               >
             </li>
             <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">

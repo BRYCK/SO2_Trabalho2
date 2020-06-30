@@ -1,6 +1,7 @@
 package SO2.SO2_Trabalho2.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Registo {
 
     private long id;
-    private Date data;
+    private Timestamp data;
     private String ocupacao;
     private Loja loja;
 
@@ -28,7 +29,7 @@ public class Registo {
 
     }
 
-    public Registo(Date data, String ocupacao, Loja loja) {
+    public Registo(Timestamp data, String ocupacao, Loja loja) {
         this.data = data;
         this.ocupacao = ocupacao;
         this.loja = loja;
@@ -45,15 +46,15 @@ public class Registo {
     }
 
     @Column(name = "data", nullable = false)
-    public Date getData() {
+    public Timestamp getData() {
         return this.data;
     }
 
     public void setData(long data) {
-        this.data = new Date(data);
+        this.data = new Timestamp(data);
     }
 
-    public void setData(Date data) {
+    public void setData(Timestamp data) {
         this.data = data;
     }
 

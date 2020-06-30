@@ -24,6 +24,8 @@ public class Loja {
     private String nome;
     private String local;
     private int tamanho;
+    private String ocupacao;
+
     private Utilizador utilizador;
     private List<Registo> registos;
 
@@ -93,6 +95,15 @@ public class Loja {
 
     public void setRegistos(List<Registo> registos) {
         this.registos = registos;
+    }
+
+    @Column(name = "ocupacao")
+    public String getOcupacao() {
+        return this.ocupacao;
+    }
+
+    public void setOcupacao(String ocupacao) {
+        this.ocupacao = ocupacao;
     }
 
 }

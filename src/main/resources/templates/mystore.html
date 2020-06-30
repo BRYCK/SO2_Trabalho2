@@ -41,6 +41,12 @@
         </div>
         </div>
 
+        <hr class="my-4" />
+
+    <a th:href="@{/loja/registos/{utilizador}(utilizador=${#authentication.getPrincipal().getUsername()})}"
+      >Clique aqui para ver todos os registos</a
+    >
+
     <script
     src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

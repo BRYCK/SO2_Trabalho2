@@ -56,6 +56,7 @@ public class RegistoController {
     @RequestMapping("/add/{utilizador}")
     public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value = "utilizador") String username) {
         Loja loja = lojaRepository.findByUtilizador(utilizadorRepository.findByUtilizador(username));
+        loja.setOcupacao(registo.getOcupacao());
         registo.setLoja(loja);
 
         registo.setData(data.getTime());
