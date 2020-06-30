@@ -1,8 +1,5 @@
 package SO2.SO2_Trabalho2.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +7,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
@@ -35,8 +28,8 @@ public class UtilizadorController {
     private UtilizadorRepository utilizadorRepository;
 
     @RequestMapping("/show")
-    public String getAllUtilizadors(Model model, Model model2) {
-        model.addAttribute("utilizadores", utilizadorRepository.findAll());
+    public String getAllUtilizadors(Model model1, Model model2) {
+        model1.addAttribute("utilizadores", utilizadorRepository.findAll());
         model2.addAttribute("loja", new Loja());
         return "utilizadores2";
     }
@@ -55,17 +48,6 @@ public class UtilizadorController {
         utilizadorRepository.save(utilizador);
         return "redirect:/result";
 
-    }
-
-    @RequestMapping("/update/{id}")
-    public ResponseEntity<Utilizador> updateUtilizador(@PathVariable(value = "id") Long utilizadorId,
-            @RequestBody Utilizador utilizadorDetails) throws ResourceNotFoundException {
-        Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
-                () -> new ResourceNotFoundException("utilizador not found for this id :: " + utilizadorId));
-
-        utilizador.setUtilizador(utilizadorDetails.getUtilizador());
-        final Utilizador updatedutilizador = utilizadorRepository.save(utilizador);
-        return ResponseEntity.ok(updatedutilizador);
     }
 
     @RequestMapping("/delete/{id}")

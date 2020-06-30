@@ -1,9 +1,10 @@
 package SO2.SO2_Trabalho2.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import SO2.SO2_Trabalho2.model.Loja;
@@ -38,7 +39,6 @@ public class HomeController {
     @GetMapping("/lojas")
     public String lojas(Model model1, Model model2) {
         model1.addAttribute("loja", new Loja());
-        model2.addAttribute("registo", new Registo());
         return "lojas";
     }
 
@@ -62,6 +62,12 @@ public class HomeController {
     public String mystore(Model model) {
         model.addAttribute("registo", new Registo());
         return "mystore";
+    }
+
+    @GetMapping("/lojaInfo")
+    public String lojaInfo(Model model1){
+        model1.addAttribute("loja", new Loja());
+        return "lojaInfo";
     }
 
 }

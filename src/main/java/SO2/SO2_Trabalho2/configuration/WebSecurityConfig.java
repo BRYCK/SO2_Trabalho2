@@ -30,10 +30,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        .antMatchers("/", "/home").permitAll()
+        .antMatchers("/", "/home", "/lojas", "/lojaInfo","/mapa").permitAll()
         .antMatchers("/hello").authenticated()
-        .antMatchers("/test").hasAuthority("ADMIN")
-        .antMatchers("/postget").hasAuthority("ADMIN")
+        .antMatchers("/mystore").authenticated()
+        .antMatchers("/result").authenticated()
+        .antMatchers("/loja/registos/{id}").access("@guard.checkUserId(authentication,#id)")
+        .antMatchers("/admin","/utilizador/show").hasAuthority("ADMIN")
         .and()
         .formLogin().loginPage("/login").permitAll()
         .and()
