@@ -2,7 +2,6 @@ package SO2.SO2_Trabalho2.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import SO2.SO2_Trabalho2.repository.UtilizadorRepository;
@@ -32,14 +30,6 @@ public class UtilizadorController {
         model1.addAttribute("utilizadores", utilizadorRepository.findAll());
         model2.addAttribute("loja", new Loja());
         return "utilizadores2";
-    }
-
-    @RequestMapping("/show/{id}")
-    public ResponseEntity<Utilizador> getUtilizadorById(@PathVariable(value = "id") Long utilizadorId)
-            throws ResourceNotFoundException {
-        Utilizador utilizador = utilizadorRepository.findById(utilizadorId).orElseThrow(
-                () -> new ResourceNotFoundException("utilizador not found for this id :: " + utilizadorId));
-        return ResponseEntity.ok().body(utilizador);
     }
 
     @RequestMapping("/add")

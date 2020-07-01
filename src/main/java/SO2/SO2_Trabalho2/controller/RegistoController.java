@@ -1,10 +1,8 @@
 package SO2.SO2_Trabalho2.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,10 +30,6 @@ public class RegistoController {
     @Autowired
     private UtilizadorRepository utilizadorRepository;
 
-    @RequestMapping("/getAll")
-    public List<Registo> getAllRegistos() {
-        return registoRepository.findAll();
-    }
 
     @RequestMapping("/add/{utilizador}")
     public String createRegisto(@ModelAttribute Registo registo, @PathVariable(value = "utilizador") String username) {
