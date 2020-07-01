@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import SO2.SO2_Trabalho2.exception.ResourceNotFoundException;
@@ -38,8 +40,9 @@ public class LojaController {
     }
 
     @RequestMapping("/registosAll")
-    public String getLojasUtilizadores(Model model) {
+    public String getLojasUtilizadores(Model model, Model model2) {
         model.addAttribute("lojas", lojaRepository.findAll());
+        model2.addAttribute("loja", new Loja());
         return "lojas";
     }
 
@@ -89,21 +92,23 @@ public class LojaController {
 
     }
 
-    @RequestMapping("/nearest/{latitude}/{longitude}")
-    public String displayNearest(@PathVariable(value="latitude") Double latitude,@PathVariable(value="longitude") Double longitude, Model model, Model modelRegistos, Model modelStr) throws ResourceNotFoundException{
-        List<Loja> lojas= lojaRepository.findAll();
-        double min= Double.MAX_VALUE;
-        Loja lojaAtual=new Loja();
+    @RequestMapping("/nearest")
+    public String displayNearest(@ModelAttribute Loja loja, Model model, Model modelRegistos, Model modelStr)
+            throws ResourceNotFoundException {
+        List<Loja> lojas = lojaRepository.findAll();
+        double min = Double.MAX_VALUE;
+        Loja lojaAtual = new Loja();
 
-        for (Loja lojaI : lojas){
-            double euclidean= Math.sqrt(Math.pow((lojaI.getLatitude()-latitude), 2)+Math.pow(lojaI.getLongitude()-longitude,2));
-            if (euclidean<min){
-                min=euclidean;
-                lojaAtual=lojaI;
+        for (Loja lojaI : lojas) {
+            double euclidean = Math.sqrt(Math.pow((lojaI.getLatitude() - loja.getLatitude()), 2)
+                    + Math.pow(lojaI.getLongitude() - loja.getLongitude(), 2));
+            if (euclidean < min) {
+                min = euclidean;
+                lojaAtual = lojaI;
             }
         }
 
-        if(lojaAtual.equals(new Loja())){
+        if (lojaAtual.equals(new Loja())) {
             throw new ResourceNotFoundException("Not found");
         }
 

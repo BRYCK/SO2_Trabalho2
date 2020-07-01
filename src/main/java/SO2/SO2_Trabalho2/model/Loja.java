@@ -45,6 +45,11 @@ public class Loja {
         this.longitude = longitude;
     }
 
+    public Loja(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {

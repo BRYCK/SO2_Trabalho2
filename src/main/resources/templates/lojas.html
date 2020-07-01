@@ -13,7 +13,7 @@
     <header th:insert="fragments.html :: nav"></header>
     <div class="container">
       <div class="jumbotron">
-        <form th:action="@{/nearest}">
+        <form th:action="@{/loja/nearest}" th:object="${loja}">
           <fieldset>
       <div class="form-row">
         <div class="col-md-6 form-group">
@@ -21,9 +21,8 @@
           <input
             type="text"
             class="form-control"
-            th:value="*{latitude}"
-            id="latitude" 
-            name="latitude"
+            id="latitude"
+            th:field="*{latitude}"
           />
         </div>
         <div class="col-md-6 form-group">
@@ -31,9 +30,8 @@
           <input
             type="text"
             class="form-control"
-            th:value="*{longitude}"
-            id="longitude" 
-            name="longitude"
+            id="longitude"
+            th:field="*{longitude}"
           />
         </div>
         <div class="form-actions" style="margin-top: 12px;">
