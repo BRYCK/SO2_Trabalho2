@@ -44,18 +44,15 @@
           </ul>
           <form
             sec:authorize="isAuthenticated()"
-            class="btn btn-primary"
             th:action="@{/logout}"
             method="post"
           >
-            <input type="submit" value="Log Out" />
+            <input class="btn btn-primary" type="submit" value="Log Out" />
           </form>
           <a
             sec:authorize="isAnonymous()"
             class="btn btn-primary"
-            th:href="@{/login}"
-            >Log In</a
-          >
+            th:href="@{/login}">Log In</a>
         </div>
       </nav>
     </div>
