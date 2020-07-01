@@ -76,12 +76,32 @@ div.mytable {
                     />
                   </div>
                   <div class="form-group">
-                    <label for="localLoja">Local(Utilizar formato coordenadas "x y")</label>
+                    <label for="localLoja">Local</label>
                     <input
                       type="text"
                       class="form-control"
                       id="local"
                       th:field="*{local}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="localLoja">Latitude</label>
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="local"
+                      th:field="*{latitude}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="localLoja">Longitude)</label>
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="local"
+                      th:field="*{longitude}"
                     />
                   </div>
                   <button type="submit" class="btn btn-primary">Create</button>

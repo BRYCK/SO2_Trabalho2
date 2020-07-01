@@ -52,26 +52,20 @@
         }
       ).addTo(mymap);
 
-      L.marker([38.5706081, -7.9085911])
-        .addTo(mymap)
-        .bindPopup("<b>Hello world!</b><br />I am a popup.");
-
       var lojas = [[${lojas}]];
 
       console.log(lojas);
 
-
-      lojas.forEach(setMarker);
-
-
-      function setMarker(loja){
-        console.log(loja.id);
-        var local = loja.local.split(" ");
-        var x = parseFloat(local[0]);
-        var y = parseFloat(local[1]);
+      
+      for (let i = 0; i < lojas.length; i++) {
+        const loja = lojas[i];
+        var x = parseFloat(loja.latitude);
+        var y = parseFloat(loja.longitude);
+        var nome = loja.nome;
+        var ocupacao = loja.ocupacao;
         L.marker([x, y])
           .addTo(mymap)
-          .bindPopup("<b>loja.nome</b><br />loja.ocupacao");
+          .bindPopup("<b>"+nome+"</b><br />"+ocupacao);
       }
 
       var popup = L.popup();
